@@ -3,6 +3,16 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
+      option: {
+        separator: ';'
+      },
+      dist: {
+        src: [
+            'public/client/*.js',
+            'public/lib/*.js'
+          ],
+        dest: 'public/dist/build.js'
+      }
     },
 
     mochaTest: {
@@ -21,6 +31,11 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+      my_target: {
+        files: {
+          'public/dist/output.min.js' : ['public/dist/build.js']
+        }
+      }
     },
 
     jshint: {
@@ -38,6 +53,17 @@ module.exports = function(grunt) {
     },
 
     cssmin: {
+      target: {
+        files: {
+          'public/dist/output.min.css': ['public/style.css']
+        }
+      }
+    },
+
+    'heroku-deploy': {
+      production: {
+        deployBranch: 'master'
+      },
     },
 
     watch: {
@@ -71,6 +97,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
+  grunt.loadNpmTasks('grunt-heroku-deploy');
 
   grunt.registerTask('server-dev', function (target) {
     // Running nodejs in a different process and displaying output on the main console
@@ -89,12 +116,9 @@ module.exports = function(grunt) {
   // Main grunt tasks
   ////////////////////////////////////////////////////
 
-  grunt.registerTask('test', [
-    'mochaTest'
-  ]);
+  grunt.registerTask('test', ['mochaTest']);
 
-  grunt.registerTask('build', [
-  ]);
+  grunt.registerTask('build', [ 'concat','uglify','cssmin']);
 
   grunt.registerTask('upload', function(n) {
     if(grunt.option('prod')) {
