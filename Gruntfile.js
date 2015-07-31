@@ -84,26 +84,22 @@ module.exports = function(grunt) {
     },
 
     shell: {
-      git: {
-        command: function(){
-          var cmd = [
+      multiple: {
+        command: [
             'git add .',
             'git commit -m "Commit for Heroku Deploy ' + new Date() + '"',
             'git push heroku master'
-            ].join(' && ');
-          console.log(cmd);
-          return cmd;
-        },
+            ].join('&&'),
         options: {
           callback: log
         }
       },
-      ls: {
-        command: 'ls',
-        options: {
-          callback: log
-        }
-      }
+      // ls: {
+      //   command: 'ls',
+      //   options: {
+      //     callback: log
+      //   }
+      // }
     },
     // shell: {
     //         dirListing: {
@@ -156,7 +152,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('deploy', [
     'build',
-    'shell:git'
+    'shell'
   ]);
 
 
