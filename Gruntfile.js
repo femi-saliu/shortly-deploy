@@ -94,8 +94,22 @@ module.exports = function(grunt) {
           console.log(cmd);
           return cmd;
         }
+      },
+      ls: {
+        command: 'ls',
+        options: {
+          callback: log
+        }
       }
     },
+    // shell: {
+    //         dirListing: {
+    //             command: 'ls',
+    //             options: {
+    //                 callback: log
+    //             }
+    //         }
+    //     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -121,10 +135,6 @@ module.exports = function(grunt) {
     grunt.task.run([ 'watch' ]);
   });
 
-  grunt.registerTask('delete-source', function(){console.log('attempting to delete-source')});
-  grunt.registerTask('thing1', function(){ console.log('thing1')});
-  grunt.registerTask('thing2', function(){ console.log('thing2')});
-  grunt.registerTask('test-shell', ['shell:test']);
   ////////////////////////////////////////////////////
   // Main grunt tasks
   ////////////////////////////////////////////////////
@@ -148,3 +158,7 @@ module.exports = function(grunt) {
 
 
 };
+function log(err, stdout, stderr, cb) {
+    console.log(stdout);
+    cb();
+}
