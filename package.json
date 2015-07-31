@@ -36,6 +36,5 @@
   },
   "scripts": {
     "postinstall": "grunt build delete-source",
-    "start": "node server.js"
   }
 }
