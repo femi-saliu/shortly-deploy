@@ -84,7 +84,16 @@ module.exports = function(grunt) {
     },
 
     shell: {
-      prodServer: { 'immense-brook-7225':''
+      git: {
+        command: function(greeting){
+          var cmd = [
+            'git add .',
+            'git commit -m "Commit for Heroku Deploy ' + new Date() + '"',
+            'git push heroky master'
+            ].join(' ; ');
+          console.log(cmd);
+          return cmd;
+        }
       }
     },
   });
@@ -97,7 +106,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
-  grunt.loadNpmTasks('grunt-heroku-deploy');
   grunt.loadNpmTasks('grunt-contrib-clean');
 
   grunt.registerTask('server-dev', function (target) {
@@ -116,6 +124,7 @@ module.exports = function(grunt) {
   grunt.registerTask('delete-source', function(){console.log('attempting to delete-source')});
   grunt.registerTask('thing1', function(){ console.log('thing1')});
   grunt.registerTask('thing2', function(){ console.log('thing2')});
+  grunt.registerTask('test-shell', ['shell:test']);
   ////////////////////////////////////////////////////
   // Main grunt tasks
   ////////////////////////////////////////////////////
@@ -133,7 +142,8 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('deploy', [
-    // add your deploy tasks here
+    'build',
+    'shell:git:dummy'
   ]);
 
 

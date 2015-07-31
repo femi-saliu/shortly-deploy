@@ -27,15 +27,11 @@
     "knex": "~0.5.7",
     "mocha": "^1.17.1",
     "mongoose": "~3.8.8",
-    "node": "~0.12.0",
     "request": "^2.34.0",
     "sqlite3": "~3.0.5"
   },
   "devDependencies": {
     "grunt-heroku-deploy": "^0.1.1",
     "supertest": "^0.10.0"
-  },
-  "scripts": {
-    "postinstall": "grunt build delete-source"
   }
 }
