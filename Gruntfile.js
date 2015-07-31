@@ -93,6 +93,9 @@ module.exports = function(grunt) {
             ].join(' && ');
           console.log(cmd);
           return cmd;
+        },
+        options: {
+          callback: log
         }
       },
       ls: {
