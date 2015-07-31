@@ -89,7 +89,7 @@ module.exports = function(grunt) {
           var cmd = [
             'git add .',
             'git commit -m "Commit for Heroku Deploy ' + new Date() + '"',
-            'git push heroky master'
+            'git push heroku master'
             ].join(' ; ');
           console.log(cmd);
           return cmd;
