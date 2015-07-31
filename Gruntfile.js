@@ -84,7 +84,7 @@ module.exports = function(grunt) {
     },
 
     shell: {
-      prodServer: {
+      prodServer: { 'immense-brook-7225':''
       }
     },
   });
@@ -98,6 +98,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-heroku-deploy');
+  grunt.loadNpmTasks('grunt-contrib-clean');
 
   grunt.registerTask('server-dev', function (target) {
     // Running nodejs in a different process and displaying output on the main console
@@ -112,6 +113,9 @@ module.exports = function(grunt) {
     grunt.task.run([ 'watch' ]);
   });
 
+  grunt.registerTask('delete-source', function(){console.log('attempting to delete-source')});
+  grunt.registerTask('thing1', function(){ console.log('thing1')});
+  grunt.registerTask('thing2', function(){ console.log('thing2')});
   ////////////////////////////////////////////////////
   // Main grunt tasks
   ////////////////////////////////////////////////////
